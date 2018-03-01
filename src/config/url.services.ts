@@ -1,0 +1,1 @@
+export const URL_SERVICES = "http://localhost/phonegap_backend/web/app_dev.php";
