@@ -3,6 +3,14 @@
         <ion-title>
             PhonegApp
         </ion-title>
+
+        <ion-buttons end>
+            <button ion-button
+                    menuToggle
+                    (click)="showMenu()">
+                <ion-icon name="menu" right></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
@@ -22,7 +30,7 @@
         Get Alias
     </button>
 
-    <ion-footer>
+    <ion-footer padding>
         <h1 class="title">PhonegApp</h1>
     </ion-footer>
 </ion-content>

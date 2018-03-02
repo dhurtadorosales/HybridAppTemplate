@@ -9,11 +9,17 @@ export class UserProvider {
 
     public url: string;
 
+    /**
+     * @param {Http} _http
+     */
     constructor(private _http: Http) {
         this.url = URL_SERVICES;
         this.getAll();
     }
 
+    /**
+     * @returns {Observable<any>}
+     */
     getAll() {
         return this
             ._http.get(this.url + '/api/user/all')

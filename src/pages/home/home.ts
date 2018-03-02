@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { MenuController, NavController} from 'ionic-angular';
 import { UserListPage } from '../user/user-list/user-list';
 import { UserNewPage } from '../user/user-new/user-new';
 import { AliasListPage } from '../alias/alias-list/alias-list';
@@ -17,8 +17,17 @@ export class HomePage {
     /**
      * @param {NavController} navCtrl
      */
-    constructor(public navCtrl: NavController) {
+    constructor(public navCtrl: NavController,
+                private menuCtrl: MenuController
+    ) {
 
+    }
+
+    /**
+     *
+     */
+    showMenu(){
+        this.menuCtrl.toggle();
     }
 
 }
