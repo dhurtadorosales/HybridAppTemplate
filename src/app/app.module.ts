@@ -12,13 +12,12 @@ import { HomePage } from '../pages/home/home';
 import { UserListPage } from '../pages/user/user-list/user-list';
 import { UserNewPage } from '../pages/user/user-new/user-new';
 import { AliasListPage } from '../pages/alias/alias-list/alias-list';
+import { TabsPage } from '../pages/common/tabs/tabs';
+import { LoginPage } from '../pages/login/login';
 
 //Providers
 import { UserProvider } from '../providers/user.provider';
 import { AliasProvider } from '../providers/alias.provider';
-import {TabsPage} from "../pages/common/tabs/tabs";
-
-
 
 @NgModule({
     declarations: [
@@ -27,7 +26,8 @@ import {TabsPage} from "../pages/common/tabs/tabs";
         UserListPage,
         UserNewPage,
         AliasListPage,
-        TabsPage
+        TabsPage,
+        LoginPage
     ],
     imports: [
         BrowserModule,
@@ -41,7 +41,8 @@ import {TabsPage} from "../pages/common/tabs/tabs";
         UserListPage,
         UserNewPage,
         AliasListPage,
-        TabsPage
+        TabsPage,
+        LoginPage
     ],
     providers: [
         StatusBar,

@@ -3,14 +3,14 @@ import { MenuController, Platform} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage } from '../pages/common/tabs/tabs';
-import { UserListPage } from "../pages/user/user-list/user-list";
+import { LoginPage } from '../pages/login/login';
 
 @Component({
     templateUrl: 'app.html'
 })
 export class MyApp {
 
-    userListPage = UserListPage;
+    loginPage = LoginPage;
     rootPage: any = TabsPage;
 
     /**
