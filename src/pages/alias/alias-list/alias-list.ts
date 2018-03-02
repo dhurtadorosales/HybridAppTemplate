@@ -1,35 +1,35 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { UserProvider } from "../../providers/user.provider";
-import { User } from "../../models/user.model";
+import { Alias} from '../../../models/alias.model';
+import { AliasProvider } from '../../../providers/alias.provider';
 
 @Component({
-    selector: 'page-user-list',
-    templateUrl: 'user-list.html',
+    selector: 'page-alias-list',
+    templateUrl: 'alias-list.html',
     providers: [
-        UserProvider
+        AliasProvider
     ]
 })
-export class UserListPage {
+export class AliasListPage {
 
-    public users : User;
+    public alias : Alias;
 
     constructor(
         public navCtrl: NavController,
-        private _userProvider: UserProvider,
+        private _aliasProvider: AliasProvider,
     ) {
-        this._userProvider.getAll();
+        this._aliasProvider.getAll();
     }
 
     ngOnInit() {
-        this.getUsers();
+        this.getAlias();
     }
 
-    getUsers() {
-        this._userProvider.getAll().subscribe(
+    getAlias() {
+        this._aliasProvider.getAll().subscribe(
             response => {
                 if (!response.error) {
-                    this.users = response;
+                    this.alias = response;
                 }
                 else {
                     alert('Error connection!');

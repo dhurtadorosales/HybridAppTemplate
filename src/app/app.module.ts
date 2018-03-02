@@ -9,9 +9,9 @@ import { HttpModule } from '@angular/http';
 
 //Pages
 import { HomePage } from '../pages/home/home';
-import { UserListPage } from '../pages/user-list/user-list';
-import { UserNewPage } from '../pages/user-new/user-new';
-import { AliasListPage } from '../pages/alias-list/alias-list';
+import { UserListPage } from '../pages/user/user-list/user-list';
+import { UserNewPage } from '../pages/user/user-new/user-new';
+import { AliasListPage } from '../pages/alias/alias-list/alias-list';
 
 //Providers
 import { UserProvider } from '../providers/user.provider';
