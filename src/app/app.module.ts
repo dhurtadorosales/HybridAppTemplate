@@ -16,6 +16,7 @@ import { AliasListPage } from '../pages/alias/alias-list/alias-list';
 //Providers
 import { UserProvider } from '../providers/user.provider';
 import { AliasProvider } from '../providers/alias.provider';
+import {TabsPage} from "../pages/common/tabs/tabs";
 
 
 
@@ -25,7 +26,8 @@ import { AliasProvider } from '../providers/alias.provider';
         HomePage,
         UserListPage,
         UserNewPage,
-        AliasListPage
+        AliasListPage,
+        TabsPage
     ],
     imports: [
         BrowserModule,
@@ -38,7 +40,8 @@ import { AliasProvider } from '../providers/alias.provider';
         HomePage,
         UserListPage,
         UserNewPage,
-        AliasListPage
+        AliasListPage,
+        TabsPage
     ],
     providers: [
         StatusBar,
