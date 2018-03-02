@@ -9,20 +9,21 @@ import { HttpModule } from '@angular/http';
 
 //Pages
 import { HomePage } from '../pages/home/home';
-import { UsersPage } from '../pages/users/users';
+import { UserListPage } from '../pages/user-list/user-list';
 import { UserNewPage } from '../pages/user-new/user-new';
-import { AliasListPage } from '../pages/alias/alias-list';
+import { AliasListPage } from '../pages/alias-list/alias-list';
 
 //Providers
 import { UserProvider } from '../providers/user.provider';
 import { AliasProvider } from '../providers/alias.provider';
 
 
+
 @NgModule({
     declarations: [
         MyApp,
         HomePage,
-        UsersPage,
+        UserListPage,
         UserNewPage,
         AliasListPage
     ],
@@ -35,7 +36,7 @@ import { AliasProvider } from '../providers/alias.provider';
     entryComponents: [
         MyApp,
         HomePage,
-        UsersPage,
+        UserListPage,
         UserNewPage,
         AliasListPage
     ],

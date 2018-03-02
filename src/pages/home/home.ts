@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { UsersPage } from '../users/users';
+import { UserListPage } from '../user-list/user-list';
 import { UserNewPage } from '../user-new/user-new';
-import { AliasListPage } from '../alias/alias-list';
+import { AliasListPage } from '../alias-list/alias-list';
 
 @Component({
     selector: 'page-home',
@@ -10,7 +10,7 @@ import { AliasListPage } from '../alias/alias-list';
 })
 export class HomePage {
 
-    usersPage : any = UsersPage;
+    usersPage : any = UserListPage;
     aliasListPage : any = AliasListPage;
     userNew : any = UserNewPage;
 
