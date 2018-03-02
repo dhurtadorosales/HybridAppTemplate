@@ -10,10 +10,15 @@ import { User } from '../../../models/user.model';
         UserProvider
     ]
 })
+
 export class UserListPage {
 
     public users : User;
 
+    /**
+     * @param {NavController} navCtrl
+     * @param {UserProvider} _userProvider
+     */
     constructor(
         public navCtrl: NavController,
         private _userProvider: UserProvider,
@@ -21,10 +26,16 @@ export class UserListPage {
         this._userProvider.getAll();
     }
 
+    /**
+     *
+     */
     ngOnInit() {
         this.getUsers();
     }
 
+    /**
+     *
+     */
     getUsers() {
         this._userProvider.getAll().subscribe(
             response => {

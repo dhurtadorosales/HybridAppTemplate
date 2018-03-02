@@ -13,6 +13,9 @@ export class TabsPage {
     tab2: any;
     tab3: any;
 
+    /**
+     *
+     */
     constructor() {
         this.tab1 = HomePage;
         this.tab2 = UserListPage;

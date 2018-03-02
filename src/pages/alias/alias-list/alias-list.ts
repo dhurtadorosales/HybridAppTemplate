@@ -14,6 +14,10 @@ export class AliasListPage {
 
     public alias : Alias;
 
+    /**
+     * @param {NavController} navCtrl
+     * @param {AliasProvider} _aliasProvider
+     */
     constructor(
         public navCtrl: NavController,
         private _aliasProvider: AliasProvider,
@@ -21,10 +25,16 @@ export class AliasListPage {
         this._aliasProvider.getAll();
     }
 
+    /**
+     *
+     */
     ngOnInit() {
         this.getAlias();
     }
 
+    /**
+     *
+     */
     getAlias() {
         this._aliasProvider.getAll().subscribe(
             response => {

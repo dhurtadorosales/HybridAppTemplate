@@ -14,6 +14,9 @@ export class HomePage {
     aliasListPage : any = AliasListPage;
     userNew : any = UserNewPage;
 
+    /**
+     * @param {NavController} navCtrl
+     */
     constructor(public navCtrl: NavController) {
 
     }
