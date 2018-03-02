@@ -5,18 +5,26 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
+import { HttpModule } from '@angular/http';
+
+//Pages
 import { HomePage } from '../pages/home/home';
-import { UsersPage } from "../pages/users/users";
-import { UserProvider } from "../providers/user.provider";
-import { HttpModule } from "@angular/http";
-import {UserNewPage} from "../pages/user-new/user-new";
+import { UsersPage } from '../pages/users/users';
+import { UserNewPage } from '../pages/user-new/user-new';
+import { AliasListPage } from '../pages/alias/alias-list';
+
+//Providers
+import { UserProvider } from '../providers/user.provider';
+import { AliasProvider } from '../providers/alias.provider';
+
 
 @NgModule({
     declarations: [
         MyApp,
         HomePage,
         UsersPage,
-        UserNewPage
+        UserNewPage,
+        AliasListPage
     ],
     imports: [
         BrowserModule,
@@ -28,12 +36,14 @@ import {UserNewPage} from "../pages/user-new/user-new";
         MyApp,
         HomePage,
         UsersPage,
-        UserNewPage
+        UserNewPage,
+        AliasListPage
     ],
     providers: [
         StatusBar,
         SplashScreen,
         UserProvider,
+        AliasProvider,
         {provide: ErrorHandler, useClass: IonicErrorHandler}
     ]
 })
