@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
 //Pages
 import { HomePage } from '../pages/home/home';
@@ -18,6 +19,10 @@ import { LoginPage } from '../pages/login/login';
 //Providers
 import { UserProvider } from '../providers/user.provider';
 import { AliasProvider } from '../providers/alias.provider';
+
+//Storage
+import { IonicStorageModule } from '@ionic/storage';
+
 
 @NgModule({
     declarations: [
@@ -32,7 +37,9 @@ import { AliasProvider } from '../providers/alias.provider';
     imports: [
         BrowserModule,
         IonicModule.forRoot(MyApp),
-        HttpModule
+        HttpModule,
+        IonicStorageModule.forRoot(),
+        FormsModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [

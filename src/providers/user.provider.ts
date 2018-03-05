@@ -1,50 +1,73 @@
-import {Injectable} from "@angular/core";
+import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
-import {Observable} from 'rxjs/Observable';
-import {Http, Headers} from "@angular/http";
-import {URL_SERVICES} from "../config/url.services";
+import { Observable } from 'rxjs/Observable';
+import { Http, Response, Headers } from '@angular/http';
+import { GLOBAL } from '../config/global';
+import { AlertController, Platform } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class UserProvider {
 
-    public url: string;
+    url: string;
+    identity: string;
+    token: string;
 
     /**
+     *
      * @param {Http} _http
+     * @param {AlertController} alertCtrl
+     * @param {Platform} platform
+     * @param {Storage} storage
      */
-    constructor(private _http: Http) {
-        this.url = URL_SERVICES;
-        this.getAll();
+    constructor(
+        private _http: Http,
+        private alertCtrl: AlertController,
+        private platform: Platform,
+        private storage: Storage
+    ) {
+        this.url = GLOBAL.url;
+        //this.chargeStorage();
     }
 
     /**
      * @returns {Observable<any>}
      */
-    getAll() {
+    getUsersAll() {
         return this
-            ._http.get(this.url + '/api/user/all')
-            .map(res => res.json());
+            ._http.get(this.url + '/user/all')
+            .map(response => response.json());
     }
 
-    new(id) {
+    /**
+     *
+     * @param user
+     * @returns {Observable<any>}
+     */
+    signIn(user) {
+        if (user.email === null || user.password === null) {
+            return Observable.throw('message.insert.credentials');
+        } else {
+            let json = JSON.stringify(user);
+            let params = "json=" + json;
+            let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
+
+            return this
+                ._http.post(this.url + '/login', params, {headers: headers})
+                .map(response => response.json());
+        }
+    }
+
+    updateUser(userToUpdate) {
+    }
+
+    deleteUser(id) {
         return this
             ._http.get(this.url)
             .map(res => res.json());
     }
 
-    update(id) {
-        return this
-            ._http.get(this.url)
-            .map(res => res.json());
-    }
-
-    delete(id) {
-        return this
-            ._http.get(this.url)
-            .map(res => res.json());
-    }
-
-    search(id) {
+    searchUser(id) {
         return this
             ._http.get(this.url)
             .map(res => res.json());

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { Http, Headers } from '@angular/http';
-import { URL_SERVICES } from '../config/url.services';
+import { GLOBAL } from '../config/global';
 
 @Injectable()
 export class AliasProvider {
@@ -13,7 +13,7 @@ export class AliasProvider {
      * @param {Http} _http
      */
     constructor(private _http: Http) {
-        this.url = URL_SERVICES;
+        this.url = GLOBAL.url;
         this.getAll();
     }
 
@@ -22,8 +22,8 @@ export class AliasProvider {
      */
     getAll() {
         return this
-            ._http.get(this.url + '/api/alias/all')
-            .map(res => res.json());
+            ._http.get(this.url + '/alias/all')
+            .map(response => response.json());
     }
 
     new(id) {

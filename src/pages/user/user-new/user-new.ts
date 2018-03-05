@@ -18,15 +18,11 @@ export class UserNewPage {
         public navCtrl: NavController,
         private _userProvider: UserProvider,
     ) {
-        this._userProvider.getAll();
-    }
-
-    ngOnInit() {
-        this.newUser();
+        this._userProvider.getUsersAll();
     }
 
     newUser() {
-        this._userProvider.getAll().subscribe(
+        this._userProvider.getUsersAll().subscribe(
             response => {
                 if (!response.error) {
                     this.users = response.users;
