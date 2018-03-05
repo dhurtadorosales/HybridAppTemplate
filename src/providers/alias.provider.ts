@@ -26,8 +26,18 @@ export class AliasProvider {
             .map(response => response.json());
     }
 
-    newAlias() {
-        alert("hola");
+    /**
+     * @param alias
+     * @returns {Observable<any>}
+     */
+    newAlias(alias) {
+        let json = JSON.stringify(alias);
+        let params = "json=" + json;
+        let headers = new Headers({'Content-Type' : 'application/x-www-form-urlencoded'});
+
+        return this
+            ._http.post(this.url + '/alias/new', params, {headers: headers})
+            .map(response => response.json());
     }
 
     update(id) {

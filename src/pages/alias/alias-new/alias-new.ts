@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AliasProvider } from "../../../providers/alias.provider";
-import { User } from '../../../models/user.model';
+import { Alias } from '../../../models/alias.model';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
     selector: 'page-alias-new',
@@ -12,31 +13,42 @@ import { User } from '../../../models/user.model';
 })
 export class AliasNewPage {
 
-    public users : User;
+    public alias : Alias;
+    public statusAlias;
 
+    /**
+     *
+     * @param {NavController} navCtrl
+     * @param {FormBuilder} formBuilder
+     * @param {AliasProvider} _aliasProvider
+     */
     constructor(
         public navCtrl: NavController,
+        private formBuilder: FormBuilder,
         private _aliasProvider: AliasProvider,
     ) {
+        this.alias = new Alias(1, '', '', null);
     }
 
+    /**
+     *
+     */
     newAlias() {
-        /*this._aliasProvider.newAlias().subscribe(
+        this._aliasProvider
+            .newAlias(this.alias)
+            .subscribe(
             response => {
-                if (!response.error) {
-                    this.users = response.users;
-                    console.log(this.users);
-                }
-                else {
-                    alert('Error connection!');
+                this.statusAlias = response.status;
+                if (this.statusAlias != 'success') {
+                    this.statusAlias = 'error';
+                } else {
+                    this.alias = response.data;
                 }
             },
             error => {
                 alert(<any>error);
             }
-        );*/
-
-        this._aliasProvider.newAlias();
+        );
     }
 
 }

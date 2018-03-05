@@ -8,15 +8,15 @@
 
 
 <ion-content padding>
-    <form (ngSubmit)="newAlias()">
+    <form #newAliasForm (ngSubmit)="newAlias(newAliasForm.value)">
         <ion-item>
             <ion-label fixed>Name</ion-label>
-            <ion-input type="text" [(ngModel)]="name" name="name"></ion-input>
+            <ion-input type="text" [(ngModel)]="alias.name" name="name"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label fixed>Origin</ion-label>
-            <ion-input type="text" [(ngModel)]="origin" name="origin"></ion-input>
+            <ion-input type="text" [(ngModel)]="alias.origin" name="origin"></ion-input>
         </ion-item>
 
         <button ion-button
