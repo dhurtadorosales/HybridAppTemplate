@@ -1,28 +1,27 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { UserProvider } from "../../../providers/user.provider";
+import { AliasProvider } from "../../../providers/alias.provider";
 import { User } from '../../../models/user.model';
 
 @Component({
-    selector: 'page-user-new',
-    templateUrl: 'user-new.html',
+    selector: 'page-alias-new',
+    templateUrl: 'alias-new.html',
     providers: [
-        UserProvider
+        AliasProvider
     ]
 })
-export class UserNewPage {
+export class AliasNewPage {
 
     public users : User;
 
     constructor(
         public navCtrl: NavController,
-        private _userProvider: UserProvider,
+        private _aliasProvider: AliasProvider,
     ) {
-        this._userProvider.getUsersAll();
     }
 
-    newUser() {
-        this._userProvider.getUsersAll().subscribe(
+    newAlias() {
+        /*this._aliasProvider.newAlias().subscribe(
             response => {
                 if (!response.error) {
                     this.users = response.users;
@@ -35,7 +34,9 @@ export class UserNewPage {
             error => {
                 alert(<any>error);
             }
-        );
+        );*/
+
+        this._aliasProvider.newAlias();
     }
 
 }

@@ -26,10 +26,8 @@ export class AliasProvider {
             .map(response => response.json());
     }
 
-    new(id) {
-        return this
-            ._http.get(this.url)
-            .map(res => res.json());
+    newAlias() {
+        alert("hola");
     }
 
     update(id) {

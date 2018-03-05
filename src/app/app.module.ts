@@ -15,6 +15,7 @@ import { UserNewPage } from '../pages/user/user-new/user-new';
 import { AliasListPage } from '../pages/alias/alias-list/alias-list';
 import { TabsPage } from '../pages/common/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
+import { AliasNewPage } from '../pages/alias/alias-new/alias-new';
 
 //Providers
 import { UserProvider } from '../providers/user.provider';
@@ -31,6 +32,7 @@ import { IonicStorageModule } from '@ionic/storage';
         UserListPage,
         UserNewPage,
         AliasListPage,
+        AliasNewPage,
         TabsPage,
         LoginPage
     ],
@@ -47,6 +49,7 @@ import { IonicStorageModule } from '@ionic/storage';
         HomePage,
         UserListPage,
         UserNewPage,
+        AliasNewPage,
         AliasListPage,
         TabsPage,
         LoginPage
