@@ -21,6 +21,7 @@ import { AliasEditPage } from '../pages/alias/alias-edit/alias-edit';
 //Providers
 import { UserProvider } from '../providers/user.provider';
 import { AliasProvider } from '../providers/alias.provider';
+import { ToastProvider } from '../providers/toast.provider';
 
 //Storage
 import { IonicStorageModule } from '@ionic/storage';
@@ -61,6 +62,7 @@ import { IonicStorageModule } from '@ionic/storage';
         SplashScreen,
         UserProvider,
         AliasProvider,
+        ToastProvider,
         {provide: ErrorHandler, useClass: IonicErrorHandler}
     ]
 })

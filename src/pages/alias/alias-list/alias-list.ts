@@ -3,12 +3,14 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Alias} from '../../../models/alias.model';
 import { AliasProvider } from '../../../providers/alias.provider';
 import { AliasEditPage } from '../alias-edit/alias-edit';
+import { ToastProvider } from '../../../providers/toast.provider';
 
 @Component({
     selector: 'page-alias-list',
     templateUrl: 'alias-list.html',
     providers: [
-        AliasProvider
+        AliasProvider,
+        ToastProvider
     ]
 })
 export class AliasListPage {
@@ -21,11 +23,13 @@ export class AliasListPage {
      * @param {NavController} navCtrl
      * @param {NavParams} navParams
      * @param {AliasProvider} _aliasProvider
+     * @param {ToastProvider} _toastProvider
      */
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
         private _aliasProvider: AliasProvider,
+        private _toastProvider: ToastProvider
     ) {
         this.aliasEditPage = AliasEditPage;
         this.getAliasAll();
@@ -41,17 +45,16 @@ export class AliasListPage {
                     this.alias = response;
                 }
                 else {
-                    alert('message.alias.get_all.error');
+                    this._toastProvider.presentToast('message.alias.get_all.error');
                 }
             },
             error => {
-                alert('message.alias.edit.error');
+                this._toastProvider.presentToast(error);
             }
         );
     }
 
     /**
-     *
      * @param alias
      */
     deleteAlias(alias) {
@@ -59,14 +62,15 @@ export class AliasListPage {
             .subscribe(
             response => {
                 if (!response.error) {
-                    alert('message.alias.delete.success')
+                    this.getAliasAll();
+                    this._toastProvider.presentToast('message.alias.delete.success');
                 }
                 else {
-                    alert('message.alias.delete.error');
+                    this._toastProvider.presentToast('message.alias.delete.error');
                 }
             },
             error => {
-                alert('message.alias.delete.error');
+                this._toastProvider.presentToast(error);
             }
         );
     }
