@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Alias} from '../../../models/alias.model';
 import { AliasProvider } from '../../../providers/alias.provider';
+import { AliasEditPage } from '../alias-edit/alias-edit';
 
 @Component({
     selector: 'page-alias-list',
@@ -12,31 +13,29 @@ import { AliasProvider } from '../../../providers/alias.provider';
 })
 export class AliasListPage {
 
-    public alias : Alias;
+    alias: Alias;
+    aliasEditPage: any;
 
     /**
+     *
      * @param {NavController} navCtrl
+     * @param {NavParams} navParams
      * @param {AliasProvider} _aliasProvider
      */
     constructor(
         public navCtrl: NavController,
+        public navParams: NavParams,
         private _aliasProvider: AliasProvider,
     ) {
-        this._aliasProvider.getAll();
+        this.aliasEditPage = AliasEditPage;
+        this.getAliasAll();
     }
 
     /**
      *
      */
-    ngOnInit() {
-        this.getAlias();
-    }
-
-    /**
-     *
-     */
-    getAlias() {
-        this._aliasProvider.getAll().subscribe(
+    getAliasAll() {
+        this._aliasProvider.getAliasAll().subscribe(
             response => {
                 if (!response.error) {
                     this.alias = response;
@@ -49,6 +48,10 @@ export class AliasListPage {
                 alert(<any>error);
             }
         );
+    }
+
+    deleteAlias() {
+        alert("hola");
     }
 
 }

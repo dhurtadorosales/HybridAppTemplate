@@ -14,7 +14,7 @@ export class LoginPage {
     public identity;
     public token;
     public loading;
-    public homePage: HomePage;
+    public homePage: any;
 
     /**
      *
@@ -38,6 +38,7 @@ export class LoginPage {
             'password': '',
             'getToken': true
         }
+        this.homePage = HomePage;
     }
 
     /**

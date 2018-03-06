@@ -10,7 +10,19 @@
 <ion-content padding>
     <ion-list>
         <ion-item *ngFor="let item of alias">
-            <h3>{{ item.name }} - {{item.origin}} ({{item.user.name}} {{item.user.lastName}})</h3>
+            <h3>
+                {{ item.name }} - {{item.origin}}
+            </h3>
+
+            <button ion-item
+                    [navPush]="aliasEditPage"
+                    [navParams]="{alias: item}">
+                <ion-icon name="arrow-dropright" item-right></ion-icon>
+            </button>
+            <button ion-item
+                    (click)="deleteAlias()">
+                <ion-icon name="trash" item-right></ion-icon>
+            </button>
         </ion-item>
     </ion-list>
 </ion-content>

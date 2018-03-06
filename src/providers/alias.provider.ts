@@ -14,13 +14,13 @@ export class AliasProvider {
      */
     constructor(private _http: Http) {
         this.url = GLOBAL.url;
-        this.getAll();
+        this.getAliasAll();
     }
 
     /**
      * @returns {Observable<any>}
      */
-    getAll() {
+    getAliasAll() {
         return this
             ._http.get(this.url + '/alias/all')
             .map(response => response.json());
@@ -43,16 +43,15 @@ export class AliasProvider {
     /**
      *
      * @param alias
-     * @param id
      * @returns {Observable<any>}
      */
-    editAlias(alias, id) {
+    editAlias(alias) {
         let json = JSON.stringify(alias);
         let params = 'json=' + json;
         let headers = new Headers({'Content-Type' : 'application/x-www-form-urlencoded'});
 
         return this
-            ._http.post(this.url + '/alias/edit/' + id, params, {headers: headers})
+            ._http.post(this.url + '/alias/edit/' + alias.id, params, {headers: headers})
             .map(response => response.json());
     }
 

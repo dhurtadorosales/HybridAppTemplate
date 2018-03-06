@@ -13,7 +13,7 @@ import { User } from '../../../models/user.model';
 
 export class UserListPage {
 
-    public users : User;
+    public users: User;
 
     /**
      * @param {NavController} navCtrl

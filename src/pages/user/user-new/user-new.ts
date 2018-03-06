@@ -12,7 +12,7 @@ import { User } from '../../../models/user.model';
 })
 export class UserNewPage {
 
-    public users : User;
+    public users: User;
 
     constructor(
         public navCtrl: NavController,

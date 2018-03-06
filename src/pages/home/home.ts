@@ -10,17 +10,21 @@ import { AliasListPage } from '../alias/alias-list/alias-list';
 })
 export class HomePage {
 
-    usersPage : any = UserListPage;
-    aliasListPage : any = AliasListPage;
-    userNew : any = UserNewPage;
+    usersPage: any;
+    aliasListPage: any;
+    userNewPage: any;
 
     /**
+     *
      * @param {NavController} navCtrl
+     * @param {MenuController} menuCtrl
      */
     constructor(public navCtrl: NavController,
                 private menuCtrl: MenuController
     ) {
-
+        this.usersPage = UserListPage;
+        this.aliasListPage = AliasListPage;
+        this.userNewPage = UserNewPage;
     }
 
     /**
