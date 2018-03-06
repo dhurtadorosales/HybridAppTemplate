@@ -41,17 +41,34 @@ export class AliasListPage {
                     this.alias = response;
                 }
                 else {
-                    alert('Error connection!');
+                    alert('message.alias.get_all.error');
                 }
             },
             error => {
-                alert(<any>error);
+                alert('message.alias.edit.error');
             }
         );
     }
 
-    deleteAlias() {
-        alert("hola");
+    /**
+     *
+     * @param alias
+     */
+    deleteAlias(alias) {
+        this._aliasProvider.deleteAlias(alias)
+            .subscribe(
+            response => {
+                if (!response.error) {
+                    alert('message.alias.delete.success')
+                }
+                else {
+                    alert('message.alias.delete.error');
+                }
+            },
+            error => {
+                alert('message.alias.delete.error');
+            }
+        );
     }
 
 }

@@ -55,19 +55,18 @@ export class AliasProvider {
             .map(response => response.json());
     }
 
-    deleteAlias(alias, id) {
-        let json = JSON.stringify(alias);
+    /**
+     *
+     * @param alias
+     * @returns {Observable<any>}
+     */
+    deleteAlias(alias) {
         let params = '';
         let headers = new Headers({'Content-Type' : 'application/x-www-form-urlencoded'});
 
         return this
-            ._http.post(this.url + '/alias/delete/' + id, params, {headers: headers})
+            ._http.post(this.url + '/alias/delete/' + alias.id, params, {headers: headers})
             .map(response => response.json());
     }
 
-    search(id) {
-        return this
-            ._http.get(this.url)
-            .map(res => res.json());
-    }
 }
