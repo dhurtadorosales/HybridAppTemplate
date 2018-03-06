@@ -16,6 +16,7 @@ import { AliasListPage } from '../pages/alias/alias-list/alias-list';
 import { TabsPage } from '../pages/common/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { AliasNewPage } from '../pages/alias/alias-new/alias-new';
+import { AliasEditPage } from '../pages/alias/alias-edit/alias-edit';
 
 //Providers
 import { UserProvider } from '../providers/user.provider';
@@ -23,7 +24,6 @@ import { AliasProvider } from '../providers/alias.provider';
 
 //Storage
 import { IonicStorageModule } from '@ionic/storage';
-
 
 @NgModule({
     declarations: [
@@ -33,6 +33,7 @@ import { IonicStorageModule } from '@ionic/storage';
         UserNewPage,
         AliasListPage,
         AliasNewPage,
+        AliasEditPage,
         TabsPage,
         LoginPage
     ],
@@ -50,6 +51,7 @@ import { IonicStorageModule } from '@ionic/storage';
         UserListPage,
         UserNewPage,
         AliasNewPage,
+        AliasEditPage,
         AliasListPage,
         TabsPage,
         LoginPage

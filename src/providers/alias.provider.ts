@@ -32,7 +32,7 @@ export class AliasProvider {
      */
     newAlias(alias) {
         let json = JSON.stringify(alias);
-        let params = "json=" + json;
+        let params = 'json=' + json;
         let headers = new Headers({'Content-Type' : 'application/x-www-form-urlencoded'});
 
         return this
@@ -40,16 +40,30 @@ export class AliasProvider {
             .map(response => response.json());
     }
 
-    update(id) {
+    /**
+     *
+     * @param alias
+     * @param id
+     * @returns {Observable<any>}
+     */
+    editAlias(alias, id) {
+        let json = JSON.stringify(alias);
+        let params = 'json=' + json;
+        let headers = new Headers({'Content-Type' : 'application/x-www-form-urlencoded'});
+
         return this
-            ._http.get(this.url)
-            .map(res => res.json());
+            ._http.post(this.url + '/alias/edit/' + id, params, {headers: headers})
+            .map(response => response.json());
     }
 
-    delete(id) {
+    deleteAlias(alias, id) {
+        let json = JSON.stringify(alias);
+        let params = '';
+        let headers = new Headers({'Content-Type' : 'application/x-www-form-urlencoded'});
+
         return this
-            ._http.get(this.url)
-            .map(res => res.json());
+            ._http.post(this.url + '/alias/delete/' + id, params, {headers: headers})
+            .map(response => response.json());
     }
 
     search(id) {

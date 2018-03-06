@@ -1,0 +1,28 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Edit Alias</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form #editAliasForm (ngSubmit)="editAlias(editAliasForm.value)">
+    <ion-item>
+      <ion-label fixed>Name</ion-label>
+      <ion-input type="text" [(ngModel)]="alias.name" name="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label fixed>Origin</ion-label>
+      <ion-input type="text" [(ngModel)]="alias.origin" name="origin"></ion-input>
+    </ion-item>
+
+    <button ion-button
+            block
+            type="submit">
+      Ingresar
+    </button>
+  </form>
+</ion-content>
