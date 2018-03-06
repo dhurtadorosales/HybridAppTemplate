@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AlertController, NavController, NavParams} from 'ionic-angular';
-import { Alias} from '../../../models/alias.model';
+import { AlertController, LoadingController, NavController, NavParams} from 'ionic-angular';
+import { Alias } from '../../../models/alias.model';
 import { AliasProvider } from '../../../providers/alias.provider';
 import { AliasEditPage } from '../alias-edit/alias-edit';
 import { ToastProvider } from '../../../providers/toast.provider';
@@ -17,12 +17,14 @@ export class AliasListPage {
 
     alias: Alias;
     aliasEditPage: any;
-    nuevo: string = "hola";
+    loading: any;
 
     /**
+     *
      * @param {NavController} navCtrl
      * @param {NavParams} navParams
      * @param {AlertController} alertCtrl
+     * @param {LoadingController} loadingCtrl
      * @param {AliasProvider} _aliasProvider
      * @param {ToastProvider} _toastProvider
      */
@@ -30,10 +32,16 @@ export class AliasListPage {
         public navCtrl: NavController,
         public navParams: NavParams,
         private alertCtrl: AlertController,
+        private loadingCtrl: LoadingController,
         private _aliasProvider: AliasProvider,
         private _toastProvider: ToastProvider
     ) {
+        this.loading = this.loadingCtrl.create({
+            content: 'message.loading',
+            dismissOnPageChange: true
+        });
         this.aliasEditPage = AliasEditPage;
+        this.loading.present();
         this.getAliasAll();
     }
 
@@ -67,7 +75,8 @@ export class AliasListPage {
             .subscribe(
             response => {
                 if (!response.error) {
-                    this.getAliasAll();
+                    //this.getAliasAll();
+                    this.refreshPage();
                     this._toastProvider.presentToast('message.alias.delete.success');
                 }
                 else {
@@ -93,7 +102,7 @@ export class AliasListPage {
                     text: 'alert.cancel',
                     role: 'cancel',
                     handler: () => {
-                        this.navCtrl.push(AliasListPage);
+                        //this.getAliasAll();
                     }
                 },
                 {
@@ -106,6 +115,23 @@ export class AliasListPage {
         });
 
         alert.present();
+    }
+
+    /**
+     *
+     */
+    refreshPage() {
+        this.getAliasAll();
+    }
+
+    /**
+     *
+     * @param refresher
+     */
+    doRefresh(refresher) {
+        setTimeout(() => {
+            refresher.complete();
+        }, 2000);
     }
 
 }
