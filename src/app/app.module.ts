@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { LongPressModule } from 'ionic-long-press';
 
 //Pages
 import { HomePage } from '../pages/home/home';
@@ -43,7 +44,8 @@ import { IonicStorageModule } from '@ionic/storage';
         IonicModule.forRoot(MyApp),
         HttpModule,
         IonicStorageModule.forRoot(),
-        FormsModule
+        FormsModule,
+        LongPressModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, LoadingController, NavController, NavParams} from 'ionic-angular';
+import { AlertController, LoadingController, NavController, NavParams, PopoverController} from 'ionic-angular';
 import { Alias } from '../../../models/alias.model';
 import { AliasProvider } from '../../../providers/alias.provider';
 import { AliasEditPage } from '../alias-edit/alias-edit';
@@ -18,6 +18,7 @@ export class AliasListPage {
     alias: Alias;
     aliasEditPage: any;
     loading: any;
+    popover: any;
 
     /**
      *
@@ -75,7 +76,6 @@ export class AliasListPage {
             .subscribe(
             response => {
                 if (!response.error) {
-                    //this.getAliasAll();
                     this.refreshPage();
                     this._toastProvider.presentToast('message.alias.delete.success');
                 }
@@ -102,7 +102,7 @@ export class AliasListPage {
                     text: 'alert.cancel',
                     role: 'cancel',
                     handler: () => {
-                        //this.getAliasAll();
+                        this.refreshPage();
                     }
                 },
                 {

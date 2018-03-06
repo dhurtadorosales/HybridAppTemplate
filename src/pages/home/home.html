@@ -17,10 +17,12 @@
 <ion-content padding>
 
     <button ion-button
+            ion-long-press
+            [interval]="400"
+            (onPressing)="showMenu()"
             color="primary"
-            block
-            [navPush]="usersPage">
-        Get Users
+            block >
+        Show menu (long click)
     </button>
 
     <button ion-button
