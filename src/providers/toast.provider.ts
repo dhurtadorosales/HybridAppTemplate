@@ -5,7 +5,6 @@ import { ToastController } from 'ionic-angular';
 export class ToastProvider {
 
     /**
-     *
      * @param {ToastController} toastCtrl
      */
     constructor(private toastCtrl: ToastController) {

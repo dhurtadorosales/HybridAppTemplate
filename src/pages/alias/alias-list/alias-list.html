@@ -19,8 +19,11 @@
                     [navParams]="{alias: item}">
                 <ion-icon name="arrow-dropright" item-right></ion-icon>
             </button>
-            <button ion-item
+            <!--<button ion-item
                     (click)="deleteAlias(item)">
+                <ion-icon name="trash" item-right></ion-icon>-->
+            <button ion-item
+                    (click)="showConfirm(item)">
                 <ion-icon name="trash" item-right></ion-icon>
             </button>
         </ion-item>

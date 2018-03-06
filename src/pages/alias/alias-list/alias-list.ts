@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { AlertController, NavController, NavParams} from 'ionic-angular';
 import { Alias} from '../../../models/alias.model';
 import { AliasProvider } from '../../../providers/alias.provider';
 import { AliasEditPage } from '../alias-edit/alias-edit';
@@ -17,17 +17,19 @@ export class AliasListPage {
 
     alias: Alias;
     aliasEditPage: any;
+    nuevo: string = "hola";
 
     /**
-     *
      * @param {NavController} navCtrl
      * @param {NavParams} navParams
+     * @param {AlertController} alertCtrl
      * @param {AliasProvider} _aliasProvider
      * @param {ToastProvider} _toastProvider
      */
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
+        private alertCtrl: AlertController,
         private _aliasProvider: AliasProvider,
         private _toastProvider: ToastProvider
     ) {
@@ -43,6 +45,9 @@ export class AliasListPage {
             response => {
                 if (!response.error) {
                     this.alias = response;
+                    if (response.length == 0) {
+                        this._toastProvider.presentToast('message.alias.empty');
+                    }
                 }
                 else {
                     this._toastProvider.presentToast('message.alias.get_all.error');
@@ -73,6 +78,34 @@ export class AliasListPage {
                 this._toastProvider.presentToast(error);
             }
         );
+    }
+
+    /**
+     *
+     * @param alias
+     */
+    showConfirm(alias) {
+        let alert = this.alertCtrl.create({
+            title: 'message.alias.delete.confirm.title',
+            message: 'message.alias.delete.confirm.question',
+            buttons: [
+                {
+                    text: 'alert.cancel',
+                    role: 'cancel',
+                    handler: () => {
+                        this.navCtrl.push(AliasListPage);
+                    }
+                },
+                {
+                    text: 'alert.confirm',
+                    handler: () => {
+                        this.deleteAlias(alias);
+                    }
+                }
+            ]
+        });
+
+        alert.present();
     }
 
 }
