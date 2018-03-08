@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, LoadingController, AlertController, Loading } from 'ionic-angular';
+import {
+    NavController, NavParams, ViewController, LoadingController, AlertController, Loading,
+    Platform
+} from 'ionic-angular';
 import { UserProvider } from '../../providers/user.provider';
 import { HomePage } from '../home/home';
+import { Storage } from '@ionic/storage';
 
 @Component({
     selector: 'page-login',
@@ -23,6 +27,8 @@ export class LoginPage {
      * @param {ViewController} viewCtrl
      * @param {AlertController} alertCtrl
      * @param {LoadingController} loadingCtrl
+     * @param {Platform} platform
+     * @param {Storage} storage
      * @param {UserProvider} _userProvider
      */
     constructor(
@@ -31,14 +37,16 @@ export class LoginPage {
         private viewCtrl: ViewController,
         private alertCtrl: AlertController,
         private loadingCtrl: LoadingController,
+        private platform: Platform,
+        private storage: Storage,
         private _userProvider: UserProvider
     ) {
         this.user = {
-            'email': '',
-            'password': '',
-            'getToken': true
+            'username': '',
+            'password': ''
         }
         this.homePage = HomePage;
+        this.chargeStorage();
     }
 
     /**
@@ -50,51 +58,95 @@ export class LoginPage {
             .signIn(this.user)
             .subscribe(
                 response => {
-                    if (response) {
-                        this.identity = response;
-                        console.log(response.status);
-                        if (this.identity.length <= 1) {
-                            this.showError('message.server.error');
-                        }
-                        if (!this.identity.status) {
-                            console.log(response.status);
-                            //Save localstorage
-                            localStorage.setItem('identity', JSON.stringify(this.identity));
-                            //alert(JSON.parse(localStorage.getItem('identity')));
-                            //Get token
-                            this.user.getToken = null;
-                            this._userProvider
-                                .signIn(this.user)
-                                .subscribe(
-                                    response => {
-                                        if (response) {
-                                            this.token = response;
+                    //console.log(response.access_token);
 
-                                            if (this.identity.length <= 1) {
-                                                this.showError('message.server.error');
-                                            }
-                                            if (!this.identity.status) {
-                                                //Save localstorage
-                                                localStorage.setItem('token', JSON.stringify(this.token));
-                                                //alert(JSON.parse(localStorage.getItem('token')));
-                                                this.navCtrl.push('HomePage');
-                                            }
-                                        } else {
-                                            this.showError('message.access.denied');
-                                        }
-                                    },
-                                    error => {
-                                        this.showError(error);
-                                    });
-                        }
+                    if (response.error) {
+                        this.showError(response.error)
                     } else {
-                        this.showError('message.access.denied')
+                        this.token = response.access_token;
+
+                        //Save localstorage
+                        this.saveStorage();
+                        console.log(localStorage.getItem('token'));
                     }
                 },
                 error => {
                     this.showError(error);
                 }
             );
+    }
+
+    private saveStorage() {
+        if (this.platform.is('cordova')) {
+            //Mobile
+            this.storage.set('token', this.token);
+            //this.storage.set('identity', this.identity);
+
+        } else {
+            //Desktop
+            if (this.token) {
+                localStorage.setItem('token', this.token);
+                //localStorage.setItem('identity', this.identity);
+            } else {
+                localStorage.removeItem('token');
+                //localStorage.removeItem('identity');
+            }
+
+        }
+    }
+
+    /**
+     *
+     */
+    logOut(){
+        this.token = null;
+        this.identity = null;
+
+        //Save localstorage
+        this.saveStorage();
+    }
+
+    /**
+     *
+     * @returns {Promise<any>}
+     */
+    chargeStorage() {
+        let promise = new Promise(
+            (resolve, reject) => {
+                if (this.platform.is('cordova')) {
+                    //mobile
+                    this.storage
+                        .ready()
+                        .then(
+                            () => {
+                                this.storage.get('token')
+                                    .then(token => {
+                                        if (token) {
+                                            this.token = token;
+                                        }
+                                    });
+
+                                this.storage.get('identity')
+                                    .then(identity => {
+                                        if (identity) {
+                                            this.identity = identity;
+                                        }
+                                        resolve();
+                                    });
+                            });
+                } else {
+                    //desktop
+                    if (localStorage.getItem('token')) {
+                        //The item exists in localstorage
+                        this.token = localStorage.getItem('token');
+                        this.identity = localStorage.getItem('identity');
+
+                    }
+                    resolve();
+                }
+            });
+
+        return promise;
     }
 
     /**
@@ -113,8 +165,6 @@ export class LoginPage {
      * @param text
      */
     showError(text) {
-        this.loading.dismiss();
-
         let alert = this.alertCtrl.create({
             title: 'message.fail',
             subTitle: text,

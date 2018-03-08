@@ -45,7 +45,7 @@ export class UserProvider {
      * @returns {Observable<any>}
      */
     signIn(user) {
-        if (user.email === null || user.password === null) {
+        if (user.username === null || user.password === null) {
             return Observable.throw('message.insert.credentials');
         } else {
             let json = JSON.stringify(user);
@@ -54,7 +54,9 @@ export class UserProvider {
 
             return this
                 ._http.post(this.url + '/login', params, {headers: headers})
-                .map(response => response.json());
+                .map(
+                    response => response.json()
+                );
         }
     }
 
