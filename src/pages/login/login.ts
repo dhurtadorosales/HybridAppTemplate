@@ -6,6 +6,7 @@ import {
 import { UserProvider } from '../../providers/user.provider';
 import { HomePage } from '../home/home';
 import { Storage } from '@ionic/storage';
+import {AliasListPage} from "../alias/alias-list/alias-list";
 
 @Component({
     selector: 'page-login',
@@ -58,8 +59,6 @@ export class LoginPage {
             .signIn(this.user)
             .subscribe(
                 response => {
-                    //console.log(response.access_token);
-
                     if (response.error) {
                         this.showError(response.error)
                     } else {
@@ -67,7 +66,7 @@ export class LoginPage {
 
                         //Save localstorage
                         this.saveStorage();
-                        console.log(localStorage.getItem('token'));
+                        this.navCtrl.push(HomePage);
                     }
                 },
                 error => {
@@ -76,20 +75,20 @@ export class LoginPage {
             );
     }
 
+    /**
+     *
+     */
     private saveStorage() {
         if (this.platform.is('cordova')) {
             //Mobile
             this.storage.set('token', this.token);
-            //this.storage.set('identity', this.identity);
 
         } else {
             //Desktop
             if (this.token) {
-                localStorage.setItem('token', this.token);
-                //localStorage.setItem('identity', this.identity);
+                localStorage.setItem('token', JSON.stringify(this.token));
             } else {
                 localStorage.removeItem('token');
-                //localStorage.removeItem('identity');
             }
 
         }
@@ -117,30 +116,19 @@ export class LoginPage {
                     //mobile
                     this.storage
                         .ready()
-                        .then(
-                            () => {
-                                this.storage.get('token')
-                                    .then(token => {
-                                        if (token) {
-                                            this.token = token;
-                                        }
-                                    });
-
-                                this.storage.get('identity')
-                                    .then(identity => {
-                                        if (identity) {
-                                            this.identity = identity;
-                                        }
-                                        resolve();
-                                    });
+                        .then(() => {
+                            this.storage.get('token')
+                                .then(token => {
+                                    if (token) {
+                                        this.token = token;
+                                    }
+                                });
                             });
                 } else {
                     //desktop
                     if (localStorage.getItem('token')) {
                         //The item exists in localstorage
                         this.token = localStorage.getItem('token');
-                        this.identity = localStorage.getItem('identity');
-
                     }
                     resolve();
                 }

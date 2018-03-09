@@ -4,6 +4,7 @@ import { Alias } from '../../../models/alias.model';
 import { AliasProvider } from '../../../providers/alias.provider';
 import { AliasEditPage } from '../alias-edit/alias-edit';
 import { ToastProvider } from '../../../providers/toast.provider';
+import { UserProvider } from '../../../providers/user.provider';
 
 @Component({
     selector: 'page-alias-list',
@@ -19,6 +20,7 @@ export class AliasListPage {
     aliasEditPage: any;
     loading: any;
     popover: any;
+    token: any;
 
     /**
      *
@@ -28,6 +30,7 @@ export class AliasListPage {
      * @param {LoadingController} loadingCtrl
      * @param {AliasProvider} _aliasProvider
      * @param {ToastProvider} _toastProvider
+     * @param {UserProvider} _userProvider
      */
     constructor(
         public navCtrl: NavController,
@@ -35,15 +38,18 @@ export class AliasListPage {
         private alertCtrl: AlertController,
         private loadingCtrl: LoadingController,
         private _aliasProvider: AliasProvider,
-        private _toastProvider: ToastProvider
+        private _toastProvider: ToastProvider,
+        private _userProvider: UserProvider
     ) {
+        this._userProvider.getToken();
         this.loading = this.loadingCtrl.create({
             content: 'message.loading',
             dismissOnPageChange: true
         });
         this.aliasEditPage = AliasEditPage;
         this.loading.present();
-        this.getAliasAll();
+        //this.getAliasAll();
+        this.getAliasByUser('YWU2N2I5NDU3OGRkN2Y0NWEyNzE5MjlkMThhMDYyMmIyODRjZjJjMDJiNmUyMzI2M2IzOWE1Yzg1YTYyNTE1MA', 22);
     }
 
     /**
@@ -60,6 +66,30 @@ export class AliasListPage {
                 }
                 else {
                     this._toastProvider.presentToast('message.alias.get_all.error');
+                }
+            },
+            error => {
+                this._toastProvider.presentToast(error);
+            }
+        );
+    }
+
+    /**
+     *
+     * @param token
+     * @param id
+     */
+    getAliasByUser(token, id) {
+        console.log(localStorage.getItem('token'));
+        this._aliasProvider.getAliasByUser(token, id).subscribe(
+            response => {
+                if (!response.error) {
+                    this.alias = response;
+                    if (response.length == 0) {
+                        this._toastProvider.presentToast('message.alias.empty');
+                    }
+                } else {
+                    this._toastProvider.presentToast('message.alias.get_by_user.error');
                 }
             },
             error => {

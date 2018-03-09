@@ -27,6 +27,21 @@ export class AliasProvider {
     }
 
     /**
+     *
+     * @param token
+     * @param id
+     * @returns {Observable<any>}
+     */
+    getAliasByUser(token, id) {
+        let params = 'authorization=' + token;
+        let headers = new Headers({'Content-Type' : 'application/x-www-form-urlencoded'});
+
+        return this
+            ._http.post(this.url + '/alias/' + id, params, {headers: headers})
+            .map(response => response.json());
+    }
+
+    /**
      * @param alias
      * @returns {Observable<any>}
      */

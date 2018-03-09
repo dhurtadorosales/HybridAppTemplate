@@ -74,4 +74,35 @@ export class UserProvider {
             ._http.get(this.url)
             .map(res => res.json());
     }
+
+    /**
+     *
+     * @returns {string}
+     */
+    getToken() {
+        let token;
+        if (this.platform.is('cordova')) {
+            //Mobile
+            token = this.storage.get('token');
+
+        } else {
+            //Desktop
+            if (this.token) {
+                token = localStorage.getItem('token');
+            } else {
+                token = localStorage.removeItem('token');
+            }
+
+        }
+
+        if (token != 'undefined') {
+            this.token = token;
+        }
+        else {
+            this.token = null;
+        }
+//console.log(this.token);
+        return this.token;
+
+    }
 }
